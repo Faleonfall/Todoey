@@ -10,12 +10,14 @@ import UIKit
 
 class TodoListViewController: UITableViewController {
     
-    var itemArray = [Item]()
+    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Items.plist")
     
-    let defaults = UserDefaults.standard
+    var itemArray = [Item]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print(dataFilePath!)
         
         var newItem = Item()
         newItem.title = "Hug a kitten"
@@ -25,9 +27,9 @@ class TodoListViewController: UITableViewController {
         newItem2.title = "Hug a kitten!!!"
         itemArray.append(newItem2)
         
-        if let items = defaults.array(forKey: "TodoListArray") as? [Item] {
-            itemArray = items
-        }
+        //        if let items = defaults.array(forKey: "TodoListArray") as? [Item] {
+        //            itemArray = items
+        //        }
     }
     
     //MARK: - TableView Datasource Methods
@@ -53,9 +55,7 @@ class TodoListViewController: UITableViewController {
         
         itemArray[indexPath.row].done = !itemArray[indexPath.row].done
         
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
+        self.saveItems()
         
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -73,12 +73,8 @@ class TodoListViewController: UITableViewController {
                 newItem.title = textField.text!
                 
                 self.itemArray.append(newItem)
-            }
-            
-            self.defaults.set(self.itemArray, forKey: "TodoListArray")
-            
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
+                
+                self.saveItems()
             }
         }
         
@@ -90,5 +86,20 @@ class TodoListViewController: UITableViewController {
         alert.addAction(action)
         
         present(alert, animated: true)
+    }
+    
+    //MARK: - Model Manipulation Methods
+    
+    func saveItems() {
+        let encoder = PropertyListEncoder()
+        
+        do {
+            let data = try encoder.encode(itemArray)
+            try data.write(to: dataFilePath!)
+        } catch {
+            print("Error encoding item array, \(error)")
+        }
+        
+        tableView.reloadData()
     }
 }
