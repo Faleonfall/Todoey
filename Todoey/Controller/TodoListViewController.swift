@@ -19,20 +19,10 @@ class TodoListViewController: UITableViewController {
         
         print(dataFilePath!)
         
-        var newItem = Item()
-        newItem.title = "Hug a kitten"
-        itemArray.append(newItem)
-        
-        var newItem2 = Item()
-        newItem2.title = "Hug a kitten!!!"
-        itemArray.append(newItem2)
-        
-        //        if let items = defaults.array(forKey: "TodoListArray") as? [Item] {
-        //            itemArray = items
-        //        }
+        loadItems()
     }
     
-    //MARK: - TableView Datasource Methods
+    //MARK: - TableVi ew Datasource Methods
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return itemArray.count
@@ -101,5 +91,17 @@ class TodoListViewController: UITableViewController {
         }
         
         tableView.reloadData()
+    }
+    
+    func loadItems() {
+        if let data = try? Data(contentsOf: dataFilePath!) {
+            let decoder = PropertyListDecoder()
+            
+            do {
+                itemArray = try decoder.decode([Item].self, from: data)
+            } catch {
+                print("Error decoding item array, \(error)")
+            }
+        }
     }
 }
