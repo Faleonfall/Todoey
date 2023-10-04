@@ -10,7 +10,6 @@ import UIKit
 
 class TodoListViewController: UITableViewController {
     
-    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Items.plist")
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     var itemArray = [Item]()
@@ -18,7 +17,7 @@ class TodoListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print(dataFilePath!)
+        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         
         //loadItems()
     }
@@ -92,15 +91,15 @@ class TodoListViewController: UITableViewController {
         tableView.reloadData()
     }
     
-//    func loadItems() {
-//        if let data = try? Data(contentsOf: dataFilePath!) {
-//            let decoder = PropertyListDecoder()
-//            
-//            do {
-//                itemArray = try decoder.decode([Item].self, from: data)
-//            } catch {
-//                print("Error decoding item array, \(error)")
-//            }
-//        }
-//    }
+    //    func loadItems() {
+    //        if let data = try? Data(contentsOf: dataFilePath!) {
+    //            let decoder = PropertyListDecoder()
+    //
+    //            do {
+    //                itemArray = try decoder.decode([Item].self, from: data)
+    //            } catch {
+    //                print("Error decoding item array, \(error)")
+    //            }
+    //        }
+    //    }
 }
