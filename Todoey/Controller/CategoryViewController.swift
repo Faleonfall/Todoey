@@ -14,7 +14,7 @@ class CategoryViewController: UITableViewController {
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     var categoryArray = [Category]()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,12 +40,18 @@ class CategoryViewController: UITableViewController {
     //MARK: - TableView Delegate Methods
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        
         performSegue(withIdentifier: "goToItems", sender: self)
         
-        self.saveItems()
+        tableView.deselectRow(at: indexPath, animated: true)
         
+        self.saveItems()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destinationVC = segue.destination as? TodoListViewController,
+           let indexPath = tableView.indexPathForSelectedRow {
+            destinationVC.selectedCategory = categoryArray[indexPath.row]
+        }
     }
     
     //MARK: - Add New Categories
