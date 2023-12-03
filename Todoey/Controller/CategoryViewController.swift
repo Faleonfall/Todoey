@@ -7,9 +7,11 @@
 //
 
 import UIKit
-import CoreData
+import RealmSwift
 
 class CategoryViewController: UITableViewController {
+    
+    let realm = try! Realm()
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
@@ -44,7 +46,7 @@ class CategoryViewController: UITableViewController {
         
         tableView.deselectRow(at: indexPath, animated: true)
         
-        self.saveItems()
+        //self.saveCategories()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -61,15 +63,17 @@ class CategoryViewController: UITableViewController {
         
         let alert = UIAlertController(title: "Add new category", message: "", preferredStyle: .alert)
         
-        let action = UIAlertAction(title: "Add category", style: .default) { action in
+        let action = UIAlertAction(title: "Add", style: .default) { action in
+            
             if textField.text != nil {
-                let newCategory = Category(context: self.context)
+                let newCategory = Category()
                 newCategory.name = textField.text!
                 
                 self.categoryArray.append(newCategory)
                 
-                self.saveItems()
+                self.save(category: newCategory)
             }
+            
         }
         
         alert.addTextField { alertTextField in
@@ -84,9 +88,11 @@ class CategoryViewController: UITableViewController {
     
     //MARK: - Data Manipulation Methods
     
-    func saveItems() {
+    func save(category: Category ) {
         do {
-            try context.save()
+            try realm.write {
+                realm.add(category)
+            }
         } catch {
             print("Error saving context \(error)")
         }
@@ -94,13 +100,13 @@ class CategoryViewController: UITableViewController {
         tableView.reloadData()
     }
     
-    func loadItems(with request: NSFetchRequest<Category> = Category.fetchRequest()) {
+    func loadItems() {
         
-        do {
-            categoryArray = try context.fetch(request)
-        } catch {
-            print("Error fetching data from context \(error)")
-        }
+//        do {
+//            categoryArray = try context.fetch(request)
+//        } catch {
+//            print("Error fetching data from context \(error)")
+//        }
         
     }
     
