@@ -50,6 +50,18 @@ class TodoListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        if let item = todoItems?[indexPath.row] {
+            do {
+                try realm.write {
+                    item.done = !item.done
+                }
+            } catch {
+                print("Error saving done status, \(error)")
+            }
+        }
+        
+        tableView.reloadData()
+        
         //context.delete(todoItems[indexPath.row])
         //todoItems.remove(at: indexPath.row)
         
@@ -69,7 +81,7 @@ class TodoListViewController: UITableViewController {
         
         let action = UIAlertAction(title: "Add item", style: .default) { action in
             if textField.text != nil {
-
+                
                 if let currentCategory = self.selectedCategory {
                     do {
                         try self.realm.write {
@@ -83,7 +95,7 @@ class TodoListViewController: UITableViewController {
                 }
                 
                 self.tableView.reloadData()
-    
+                
             }
             
         }
@@ -106,6 +118,7 @@ class TodoListViewController: UITableViewController {
     }
     
     //MARK: - Search bar methods
+    
     //extension TodoListViewController: UISearchBarDelegate {
     //    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
     //        let request : NSFetchRequest<Item> = Item.fetchRequest()
@@ -130,5 +143,4 @@ class TodoListViewController: UITableViewController {
     //        }
     //    }
     //}
-    
 }
