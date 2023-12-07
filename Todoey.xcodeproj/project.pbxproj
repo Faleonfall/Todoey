@@ -87,10 +87,10 @@
 				EB2BE507239524DC00FB933B /* Info.plist */,
 				EB2BE4F9239524DB00FB933B /* AppDelegate.swift */,
 				EB2BE502239524DC00FB933B /* Assets.xcassets */,
-				EB2BE504239524DC00FB933B /* LaunchScreen.storyboard */,
 				FA5A25C62ABEA50F0065FB86 /* Controller */,
 				FA5A25C32ABEA4600065FB86 /* Model */,
 				FA5A25C72ABEA52E0065FB86 /* View */,
+				EB2BE504239524DC00FB933B /* LaunchScreen.storyboard */,
 			);
 			path = Todoey;
 			sourceTree = "<group>";
@@ -98,8 +98,8 @@
 		FA5A25C32ABEA4600065FB86 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				FA813D3F2B1CBACE001BAAA0 /* Item.swift */,
 				FA813D412B1CBADE001BAAA0 /* Category.swift */,
+				FA813D3F2B1CBACE001BAAA0 /* Item.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";

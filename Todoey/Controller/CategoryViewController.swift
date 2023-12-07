@@ -2,7 +2,7 @@
 //  CategoryViewController.swift
 //  Todoey
 //
-//  Created by Vladimir Krivitskii on 20.11.2023.
+//  Created by Volodymyr Kryvytskyi on 20.11.2023.
 //  Copyright © 2023 App Brewery. All rights reserved.
 //
 

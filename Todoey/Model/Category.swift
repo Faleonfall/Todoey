@@ -2,7 +2,7 @@
 //  Category.swift
 //  Todoey
 //
-//  Created by Vladimir Krivitskii on 03.12.2023.
+//  Created by Volodymyr Kryvytskyi on 03.12.2023.
 //  Copyright © 2023 App Brewery. All rights reserved.
 //
 
