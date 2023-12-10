@@ -16,6 +16,7 @@
 		FA5475B82B0B70160058C31D /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5475B72B0B70160058C31D /* CategoryViewController.swift */; };
 		FA813D402B1CBACE001BAAA0 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA813D3F2B1CBACE001BAAA0 /* Item.swift */; };
 		FA813D422B1CBADE001BAAA0 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA813D412B1CBADE001BAAA0 /* Category.swift */; };
+		FA8326EF2B252F6C00A785CA /* SwipeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8326EE2B252F6C00A785CA /* SwipeTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		FA5475B72B0B70160058C31D /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		FA813D3F2B1CBACE001BAAA0 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		FA813D412B1CBADE001BAAA0 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		FA8326EE2B252F6C00A785CA /* SwipeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 			children = (
 				FA5475B72B0B70160058C31D /* CategoryViewController.swift */,
 				EB2BE4FD239524DB00FB933B /* TodoListViewController.swift */,
+				FA8326EE2B252F6C00A785CA /* SwipeTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -241,6 +244,7 @@
 				FA5475B82B0B70160058C31D /* CategoryViewController.swift in Sources */,
 				EB2BE4FE239524DB00FB933B /* TodoListViewController.swift in Sources */,
 				EB2BE4FA239524DB00FB933B /* AppDelegate.swift in Sources */,
+				FA8326EF2B252F6C00A785CA /* SwipeTableViewController.swift in Sources */,
 				FA813D422B1CBADE001BAAA0 /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
