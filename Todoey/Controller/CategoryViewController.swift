@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import ChameleonFramework
 
 class CategoryViewController: SwipeTableViewController {
     
@@ -20,7 +21,26 @@ class CategoryViewController: SwipeTableViewController {
         
         loadCategories()
         
-        tableView.rowHeight = 75
+        tableView.separatorStyle = .none
+        
+        //print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        guard let navBar = navigationController?.navigationBar else {
+            fatalError("Navigation controller does not exist.")
+            
+        }
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = UIColor(hexString: "#5AA7E6")
+        appearance.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        navBar.tintColor = UIColor.white
+
+        
+        navBar.standardAppearance = appearance
+        navBar.scrollEdgeAppearance = appearance
     }
     
     //MARK: - TableView Datasource Methods
@@ -33,9 +53,14 @@ class CategoryViewController: SwipeTableViewController {
         
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
         
-        let item = categories?[indexPath.row]
-        
-        cell.textLabel?.text = item?.name ?? "No Categories Added yet"
+        if let item = categories?[indexPath.row] {
+            cell.textLabel?.text = item.name
+            
+            guard let categoryColor = UIColor(hexString: item.color) else {fatalError()}
+            
+            cell.backgroundColor = categoryColor
+            cell.textLabel?.textColor = ContrastColorOf(categoryColor, returnFlat: true)
+        }
         
         return cell
     }
@@ -69,6 +94,7 @@ class CategoryViewController: SwipeTableViewController {
             if textField.text != nil {
                 let newCategory = Category()
                 newCategory.name = textField.text!
+                newCategory.color = UIColor.randomFlat().hexValue()
                 
                 self.save(category: newCategory)
             }
@@ -121,4 +147,3 @@ class CategoryViewController: SwipeTableViewController {
     }
     
 }
-
