@@ -35,6 +35,8 @@ class CategoryViewController: SwipeTableViewController {
         
         let appearance = UINavigationBarAppearance()
         appearance.backgroundColor = UIColor(hexString: "#5AA7E6")
+        
+        appearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         appearance.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         navBar.tintColor = UIColor.white
 

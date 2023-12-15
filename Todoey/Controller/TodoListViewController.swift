@@ -46,7 +46,9 @@ class TodoListViewController: SwipeTableViewController {
                 let appearance = UINavigationBarAppearance()
                 
                 appearance.backgroundColor = navBarColor
+                appearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: ContrastColorOf(navBarColor, returnFlat: true)]
                 appearance.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: ContrastColorOf(navBarColor, returnFlat: true)]
+                
                 
                 navBar.tintColor = ContrastColorOf(navBarColor, returnFlat: true)
                 
