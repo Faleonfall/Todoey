@@ -1,19 +1,33 @@
-![App Brewery Banner](https://github.com/londonappbrewery/Images/blob/master/AppBreweryBanner.png)
-
-
 # Todoey ✓
 
-## Our Goal
+A simple iOS to-do list app for keeping track of your tasks.
+Organize todos into categories with persistent local storage, swipe-to-delete, and colorful UI.
 
-The objective of this tutorial is to understand how to save data in iOS. We'll look at various choices and learn to use UserDefaults, Core Data and Realm.
+---
 
+## 🧭 Features
 
-## What you will create
+* Create categories and add todo items under each
+* Mark items as done with a checkmark
+* Swipe to delete categories and items
+* Persistent local storage with Realm
+* Color-coded categories and cells
+* Search bar to filter items
 
-A todolist app to keep track of all your tasks.
+---
 
+## 🛠️ Tech Stack
 
->This is a companion project to The App Brewery's Complete iOS Development Bootcamp, check out the full course at [www.appbrewery.co](https://www.appbrewery.co/)
+* **Language:** Swift
+* **Framework:** UIKit
+* **Platform:** iOS 13+
+* **Storage:** Realm
+* **Dependencies:** RealmSwift, SwipeCellKit, ChameleonFramework
 
-![End Banner](https://github.com/londonappbrewery/Images/blob/master/readme-end-banner.png)
+---
 
+## 📦 About
+
+Built as a learning project to practice persisting data on iOS. Explores saving data with
+UserDefaults, Core Data, and Realm, settling on Realm for the final implementation alongside
+a clean category and item browsing flow.
