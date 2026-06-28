@@ -10,16 +10,13 @@ xcuserdata/
 DerivedData/
 build/
 
+# Isolated CLI build output (scripts/xc.sh)
+.build-cli/
+
 # Swift Package Manager
 .swiftpm/
 .build/
 Package.resolved
-
-# CocoaPods
-# Pods/ kept in source control while using CocoaPods
-# Uncomment after migrating to SPM:
-# Pods/
-# *.xcworkspace
 
 # Carthage
 Carthage/Build/
