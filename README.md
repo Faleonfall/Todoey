@@ -18,11 +18,21 @@ Organize todos into categories with persistent local storage, swipe-to-delete, a
 
 ## 🛠️ Tech Stack
 
-* **Language:** Swift
+* **Language:** Swift 6
 * **Framework:** UIKit
-* **Platform:** iOS 13+
+* **Platform:** iOS 18+
 * **Storage:** Realm
-* **Dependencies:** RealmSwift, SwipeCellKit, ChameleonFramework
+* **Dependencies:** RealmSwift, SwipeCellKit
+
+---
+
+## 🚀 Setup
+
+```bash
+pod install
+git config core.hooksPath .githooks   # enable swift-format pre-commit hook
+open Todoey.xcworkspace
+```
 
 ---
 

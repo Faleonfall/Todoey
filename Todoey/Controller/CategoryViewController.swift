@@ -1,6 +1,5 @@
-import UIKit
 import RealmSwift
-import ChameleonFramework
+import UIKit
 
 class CategoryViewController: SwipeTableViewController {
 
@@ -24,7 +23,9 @@ class CategoryViewController: SwipeTableViewController {
         let appearance = UINavigationBarAppearance()
         appearance.backgroundColor = UIColor(hexString: "#5AA7E6")
         appearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        appearance.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        appearance.largeTitleTextAttributes = [
+            NSAttributedString.Key.foregroundColor: UIColor.white
+        ]
         navBar.tintColor = UIColor.white
 
         navBar.standardAppearance = appearance
@@ -36,7 +37,9 @@ class CategoryViewController: SwipeTableViewController {
         return categories?.count ?? 1
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)
+        -> UITableViewCell
+    {
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
 
         if let category = categories?[indexPath.row] {
@@ -45,7 +48,7 @@ class CategoryViewController: SwipeTableViewController {
             guard let categoryColor = UIColor(hexString: category.color) else { fatalError() }
 
             cell.backgroundColor = categoryColor
-            cell.textLabel?.textColor = ContrastColorOf(categoryColor, returnFlat: true)
+            cell.textLabel?.textColor = categoryColor.contrastingTextColor
         }
 
         return cell
@@ -59,7 +62,8 @@ class CategoryViewController: SwipeTableViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destinationVC = segue.destination as? TodoListViewController,
-           let indexPath = tableView.indexPathForSelectedRow {
+            let indexPath = tableView.indexPathForSelectedRow
+        {
             destinationVC.selectedCategory = categories?[indexPath.row]
         }
     }
@@ -68,7 +72,8 @@ class CategoryViewController: SwipeTableViewController {
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
         var textField = UITextField()
 
-        let alert = UIAlertController(title: "Add new category", message: "", preferredStyle: .alert)
+        let alert = UIAlertController(
+            title: "Add new category", message: "", preferredStyle: .alert)
 
         let action = UIAlertAction(title: "Add", style: .default) { action in
             if let text = textField.text, !text.isEmpty {

@@ -1,6 +1,5 @@
-import UIKit
 import RealmSwift
-import ChameleonFramework
+import UIKit
 
 class TodoListViewController: SwipeTableViewController {
 
@@ -34,10 +33,14 @@ class TodoListViewController: SwipeTableViewController {
         if let navBarColor = UIColor(hexString: colorHex) {
             let appearance = UINavigationBarAppearance()
             appearance.backgroundColor = navBarColor
-            appearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: ContrastColorOf(navBarColor, returnFlat: true)]
-            appearance.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: ContrastColorOf(navBarColor, returnFlat: true)]
+            appearance.titleTextAttributes = [
+                NSAttributedString.Key.foregroundColor: navBarColor.contrastingTextColor
+            ]
+            appearance.largeTitleTextAttributes = [
+                NSAttributedString.Key.foregroundColor: navBarColor.contrastingTextColor
+            ]
 
-            navBar.tintColor = ContrastColorOf(navBarColor, returnFlat: true)
+            navBar.tintColor = navBarColor.contrastingTextColor
             navBar.standardAppearance = appearance
             navBar.scrollEdgeAppearance = appearance
 
@@ -50,14 +53,17 @@ class TodoListViewController: SwipeTableViewController {
         return todoItems?.count ?? 1
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)
+        -> UITableViewCell
+    {
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
 
         if let item = todoItems?[indexPath.row] {
-            if let categoryColor = UIColor(hexString: selectedCategory?.color ?? ""),
-               let color = categoryColor.darken(byPercentage: CGFloat(indexPath.row) / CGFloat(todoItems!.count)) {
+            if let categoryColor = UIColor(hexString: selectedCategory?.color ?? "") {
+                let color = categoryColor.darkened(
+                    by: CGFloat(indexPath.row) / CGFloat(todoItems!.count))
                 cell.backgroundColor = color
-                cell.textLabel?.textColor = ContrastColorOf(color, returnFlat: true)
+                cell.textLabel?.textColor = color.contrastingTextColor
             }
 
             cell.textLabel?.text = item.title
@@ -93,7 +99,8 @@ class TodoListViewController: SwipeTableViewController {
 
         let action = UIAlertAction(title: "Add item", style: .default) { action in
             guard let text = textField.text, !text.isEmpty,
-                  let currentCategory = self.selectedCategory else { return }
+                let currentCategory = self.selectedCategory
+            else { return }
 
             do {
                 try self.realm.write {
@@ -144,7 +151,8 @@ class TodoListViewController: SwipeTableViewController {
 extension TodoListViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let query = searchBar.text else { return }
-        todoItems = todoItems?.filter("title CONTAINS[cd] %@", query).sorted(byKeyPath: "dateCreated", ascending: true)
+        todoItems = todoItems?.filter("title CONTAINS[cd] %@", query).sorted(
+            byKeyPath: "dateCreated", ascending: true)
         tableView.reloadData()
     }
 
